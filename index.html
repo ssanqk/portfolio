@@ -3,16 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>ssanqk | AI-агенти, чат-боти та веброзробка</title>
+  <title>Портфоліо: AI-агенти, чат-боти та веброзробка</title>
   <meta name="description" content="Розробляю AI-агентів, Telegram-ботів, лендинги та вебзастосунки під замовлення. Python, Claude API, Next.js, PostgreSQL.">
   <meta name="theme-color" content="#060606">
   <meta name="color-scheme" content="dark">
-  <meta name="author" content="ssanqk">
   <meta name="robots" content="index, follow">
 
   <meta property="og:type" content="website">
   <meta property="og:locale" content="uk_UA">
-  <meta property="og:title" content="ssanqk | AI-агенти, чат-боти та веброзробка">
+  <meta property="og:title" content="Портфоліо: AI-агенти, чат-боти та веброзробка">
   <meta property="og:description" content="AI-агенти, чат-боти, лендинги та вебзастосунки під замовлення.">
   <meta property="og:url" content="https://ssanqk.github.io/portfolio/">
   <meta property="og:image" content="https://ssanqk.github.io/portfolio/assets/og.png">
@@ -40,14 +39,11 @@
         <rect x="1" y="1" width="30" height="30" rx="9" stroke="currentColor" stroke-opacity=".35" stroke-width="1.5"/>
         <path d="M7 19c3 0 3-6 6-6s3 6 6 6 3-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       </svg>
-      <span data-bind="brand">ssanqk</span>
     </a>
     <nav class="nav__links" aria-label="Основна навігація">
       <a href="#services">Послуги</a>
       <a href="#projects">Проєкти</a>
-      <a href="#contact">Контакт</a>
     </nav>
-    <a class="btn btn--primary btn--sm" data-bind-href="contactUrl" href="#contact">Написати</a>
   </header>
 
   <main id="main">
@@ -58,8 +54,7 @@
         <h1 class="hero__title reveal" id="hero-title" style="--delay:.08s" data-bind="hero.title"></h1>
         <p class="hero__lead reveal" style="--delay:.16s" data-bind="hero.lead"></p>
         <div class="hero__actions reveal" style="--delay:.24s">
-          <a class="btn btn--primary" data-bind-href="contactUrl" href="#contact">Обговорити проєкт</a>
-          <a class="btn btn--ghost" href="#projects">Переглянути роботи</a>
+          <a class="btn btn--primary" href="#projects">Переглянути роботи</a>
         </div>
       </div>
       <div class="hero__visual" aria-hidden="true">
@@ -101,17 +96,10 @@
   </main>
 
   <!-- 5. Футер -->
-  <footer class="footer" id="contact" aria-labelledby="contact-title">
-    <div class="container">
-      <div class="contact">
-        <span class="badge reveal"><span class="badge__dot badge__dot--live" aria-hidden="true"></span>Контакт</span>
-        <h2 class="contact__title reveal" id="contact-title" style="--delay:.06s" data-bind="contactTitle"></h2>
-        <div class="contact__actions reveal" style="--delay:.12s" id="contact-actions"></div>
-      </div>
-      <div class="footer__bar">
-        <p>© <span id="year"></span> <span data-bind="brand"></span></p>
-        <ul class="footer__socials" id="footer-socials"></ul>
-      </div>
+  <footer class="footer">
+    <div class="container footer__bar">
+      <p>© <span id="year"></span></p>
+      <a href="#top">Нагору</a>
     </div>
   </footer>
 

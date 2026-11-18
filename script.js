@@ -5,8 +5,6 @@
    змініть поля й збережіть. Порядок у масиві = порядок на сторінці.
    ========================================================================== */
 const CONTENT = {
-  brand: "ssanqk",
-
   hero: {
     badge: "Приймаю замовлення",
     title: "Лендинги, вебзастосунки та AI-агенти під ключ",
@@ -99,15 +97,6 @@ const CONTENT = {
       soon: true,
     },
   ],
-
-  contactTitle: "Маєте ідею? Обговорімо її",
-
-  // primary: true — головний контакт (кнопки «Написати» / «Обговорити проєкт»)
-  contacts: [
-    { label: "Telegram", url: "https://t.me/your_username", primary: true },
-    { label: "GitHub", url: "https://github.com/ssanqk" },
-    // { label: "Email", url: "mailto:you@example.com" },
-  ],
 };
 
 /* ==========================================================================
@@ -141,18 +130,9 @@ const isExternal = (url) => /^https?:\/\//.test(url);
 const linkAttrs = (url) => (isExternal(url) ? ' target="_blank" rel="noopener noreferrer"' : "");
 
 function render() {
-  const primary = CONTENT.contacts.find((c) => c.primary) || CONTENT.contacts[0];
-  const data = { ...CONTENT, contactUrl: primary ? primary.url : "#contact" };
-
   document.querySelectorAll("[data-bind]").forEach((el) => {
-    const value = get(data, el.dataset.bind);
+    const value = get(CONTENT, el.dataset.bind);
     if (value != null) el.textContent = value;
-  });
-  document.querySelectorAll("[data-bind-href]").forEach((el) => {
-    const url = get(data, el.dataset.bindHref);
-    if (!url) return;
-    el.href = url;
-    if (isExternal(url)) { el.target = "_blank"; el.rel = "noopener noreferrer"; }
   });
 
   $("#stack-list").innerHTML = CONTENT.stack
@@ -172,19 +152,6 @@ function render() {
     .join("");
 
   $("#projects-list").innerHTML = CONTENT.projects.map(projectCard).join("");
-
-  $("#contact-actions").innerHTML = CONTENT.contacts
-    .map(
-      (c) =>
-        `<a class="btn ${c.primary ? "btn--primary" : "btn--ghost"}" href="${esc(c.url)}"${linkAttrs(c.url)}>${esc(
-          c.primary ? `Написати в ${c.label}` : c.label
-        )}</a>`
-    )
-    .join("");
-
-  $("#footer-socials").innerHTML = CONTENT.contacts
-    .map((c) => `<li><a href="${esc(c.url)}"${linkAttrs(c.url)}>${esc(c.label)}</a></li>`)
-    .join("");
 
   $("#year").textContent = new Date().getFullYear();
 }

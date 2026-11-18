@@ -34,7 +34,6 @@ assets/         favicon, og-прев'ю, assets/projects/ для скриншо�
 
 3. Закомітьте й запуште, GitHub Pages оновиться за хвилину.
 
-Контакти (Telegram, GitHub, email) редагуються в масиві `contacts` у тому ж блоці.
 
 ## Локальний перегляд
 

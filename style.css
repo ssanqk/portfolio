@@ -29,7 +29,7 @@
   --fs-lead: clamp(1rem, 0.94rem + 0.3vw, 1.125rem);
   --fs-small: 0.875rem;
   --fs-xs: 0.75rem;
-  --track-display: -0.045em;
+  --track-display: -0.028em;
   --track-h2: -0.035em;
   --track-h3: -0.012em;
 
@@ -135,13 +135,13 @@ ul { margin: 0; padding: 0; list-style: none; }
   top: var(--s-4);
   left: 50%;
   z-index: 50;
-  width: min(calc(100% - var(--gutter) * 2), 760px);
+  width: min(calc(100% - var(--gutter) * 2), 420px);
   transform: translateX(-50%);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--s-4);
-  padding: var(--s-2) var(--s-2) var(--s-2) var(--s-5);
+  padding: var(--s-1) var(--s-1) var(--s-1) var(--s-4);
   border: 1px solid var(--line);
   border-radius: var(--r-pill);
   background: rgba(10, 10, 10, 0.55);
@@ -165,7 +165,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .nav__logo svg { width: 22px; height: 22px; }
 
 .nav__links {
-  display: none;
+  display: flex;
   gap: var(--s-1);
 }
 .nav__links a {
@@ -607,61 +607,20 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 
 /* ==========================================================================
-   Футер / контакт
+   Футер
    ========================================================================== */
-.footer {
-  position: relative;
-  padding-top: var(--section-y);
-  border-top: 1px solid var(--line);
-  overflow: hidden;
-}
-.footer::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: 360px;
-  background: radial-gradient(45% 70% at 50% 0%, rgba(255, 255, 255, 0.07), transparent 70%);
-  pointer-events: none;
-}
-
-.contact {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--s-5);
-  text-align: center;
-}
-.contact__title {
-  font-size: var(--fs-h2);
-  font-weight: 600;
-  line-height: 1.08;
-  letter-spacing: var(--track-h2);
-  max-width: 16ch;
-  text-wrap: balance;
-}
-.contact__actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--s-3);
-}
-
+.footer { border-top: 1px solid var(--line); }
 .footer__bar {
-  position: relative;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: var(--s-3);
-  margin-top: var(--section-y);
+  justify-content: space-between;
+  gap: var(--s-4);
   padding-block: var(--s-6);
-  border-top: 1px solid var(--line);
   font-size: var(--fs-small);
   color: var(--text-3);
 }
-.footer__socials { display: flex; gap: var(--s-5); }
-.footer__socials a { transition: color 0.2s ease; }
-.footer__socials a:hover { color: var(--text); }
+.footer__bar a { transition: color 0.2s ease; }
+.footer__bar a:hover { color: var(--text); }
 
 /* ==========================================================================
    Поява при скролі
@@ -687,7 +646,6 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 
 @media (min-width: 900px) {
-  .nav__links { display: flex; }
   .services { grid-template-columns: repeat(3, 1fr); }
   .services > :last-child { grid-column: auto; }
   .service { padding: var(--s-7) var(--s-6) var(--s-6); min-height: 300px; }
@@ -703,12 +661,10 @@ ul { margin: 0; padding: 0; list-style: none; }
 
   .stack + .section { padding-top: clamp(4rem, 2rem + 5vw, 6rem); }
 
-  .footer__bar { flex-direction: row; justify-content: space-between; }
 }
 
 @media (max-width: 380px) {
   .hero__actions .btn { flex: 1 1 100%; }
-  .nav { padding-left: var(--s-4); }
 }
 
 /* ==========================================================================
