@@ -20,7 +20,8 @@
   --paper: 10, 10, 10;      /* RGB для напівпрозорих підкладок */
   --accent-rgb: 201, 212, 223;
   --title-from: #ffffff;
-  --title-to: #9a9a9a;
+  --title-accent-to: #d4d4d4;
+  --title-rest: #7a7a7a;     /* приглушена частина заголовка */
   --grain: 0.05;
   --line: rgba(var(--ink), 0.08);   /* рамки карток */
   --line-strong: rgba(var(--ink), 0.16);
@@ -30,7 +31,7 @@
 
   /* Типографіка — Geist, одна гарнітура, ієрархія вагою і трекінгом */
   --font: "Geist", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --fs-display: clamp(2.5rem, 1.4rem + 5.6vw, 5.25rem);
+  --fs-display: clamp(2.25rem, 1.3rem + 4.6vw, 4.5rem);
   --fs-h2: clamp(2rem, 1.4rem + 2.8vw, 3.25rem);
   --fs-h3: 1.125rem;
   --fs-body: 1rem;
@@ -80,7 +81,8 @@
   --paper: 255, 255, 255;
   --accent-rgb: 92, 110, 128;
   --title-from: #0a0a0a;
-  --title-to: #707070;
+  --title-accent-to: #2b2b2b;
+  --title-rest: #8c8c8c;
   --grain: 0.03;
   --line: rgba(0, 0, 0, 0.08);
   --line-strong: rgba(0, 0, 0, 0.14);
@@ -325,13 +327,18 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 
 .hero__title {
-  max-width: 14ch;
+  max-width: 17ch;
   font-size: var(--fs-display);
   font-weight: 600;
-  line-height: 1.02;
+  line-height: 1.04;
   letter-spacing: var(--track-display);
   text-wrap: balance;
-  background: linear-gradient(180deg, var(--title-from) 30%, var(--title-to) 100%);
+  color: var(--title-rest);
+}
+.nowrap { white-space: nowrap; }
+/* перше слово — яскраве, решта заголовка приглушена */
+.hero__accent {
+  background: linear-gradient(180deg, var(--title-from) 35%, var(--title-accent-to) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
