@@ -20,8 +20,7 @@
   --paper: 10, 10, 10;      /* RGB для напівпрозорих підкладок */
   --accent-rgb: 201, 212, 223;
   --title-from: #ffffff;
-  --title-accent-to: #d4d4d4;
-  --title-rest: #7a7a7a;     /* приглушена частина заголовка */
+  --title-to: #9a9a9a;
   --grain: 0.05;
   --line: rgba(var(--ink), 0.08);   /* рамки карток */
   --line-strong: rgba(var(--ink), 0.16);
@@ -81,8 +80,7 @@
   --paper: 255, 255, 255;
   --accent-rgb: 92, 110, 128;
   --title-from: #0a0a0a;
-  --title-accent-to: #2b2b2b;
-  --title-rest: #8c8c8c;
+  --title-to: #707070;
   --grain: 0.03;
   --line: rgba(0, 0, 0, 0.08);
   --line-strong: rgba(0, 0, 0, 0.14);
@@ -333,16 +331,12 @@ ul { margin: 0; padding: 0; list-style: none; }
   line-height: 1.04;
   letter-spacing: var(--track-display);
   text-wrap: balance;
-  color: var(--title-rest);
-}
-.nowrap { white-space: nowrap; }
-/* перше слово — яскраве, решта заголовка приглушена */
-.hero__accent {
-  background: linear-gradient(180deg, var(--title-from) 35%, var(--title-accent-to) 100%);
+  background: linear-gradient(180deg, var(--title-from) 30%, var(--title-to) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
+.nowrap { white-space: nowrap; }
 
 .hero__lead {
   max-width: 34rem;

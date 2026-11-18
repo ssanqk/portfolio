@@ -8,7 +8,6 @@ const CONTENT = {
   hero: {
     badge: "Приймаю замовлення",
     title: "Вебзастосунки, сайти та лендинги, AI-агенти та чат-боти",
-    titleAccent: "Вебзастосунки", // частина заголовка, виділена яскравішим кольором
     lead: "Розробка продуктів і зручна інтеграція сервісів для легкості роботи зі складними системами.",
   },
 
@@ -136,17 +135,11 @@ function render() {
     if (value != null) el.textContent = value;
   });
 
-  // Акцент у заголовку hero: виділяємо задану частину (перше слово)
   // Слова з дефісом (AI-агенти, чат-боти) не розриваються на два рядки
-  const { title, titleAccent } = CONTENT.hero;
-  const nowrap = (s) => esc(s).replace(/\S+-\S+/g, (w) => `<span class="nowrap">${w}</span>`);
-  const i = titleAccent ? title.indexOf(titleAccent) : -1;
-  $("#hero-title").innerHTML =
-    i < 0
-      ? nowrap(title)
-      : nowrap(title.slice(0, i)) +
-        `<span class="hero__accent">${esc(titleAccent)}</span>` +
-        nowrap(title.slice(i + titleAccent.length));
+  $("#hero-title").innerHTML = esc(CONTENT.hero.title).replace(
+    /\S+-\S+/g,
+    (w) => `<span class="nowrap">${w}</span>`
+  );
 
   $("#stack-list").innerHTML = CONTENT.stack
     .map((t) => `<li class="stack__item">${ICONS[t.icon] || ""}<span>${esc(t.name)}</span></li>`)
