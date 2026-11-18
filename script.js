@@ -241,7 +241,15 @@ function initWave() {
   const canvas = $("#wave");
   if (!canvas) return;
   const ctx = canvas.getContext("2d");
-  const BG = "#060606";
+  // Кольори беруться з CSS-токенів поточної теми
+  let BG = "#060606", INK = "255,255,255", alphaK = 1;
+  function readColors() {
+    const cs = getComputedStyle(document.documentElement);
+    BG = cs.getPropertyValue("--bg").trim() || BG;
+    INK = (cs.getPropertyValue("--ink").trim() || INK).replace(/\s/g, "");
+    alphaK = document.documentElement.dataset.theme === "light" ? 0.8 : 1;
+  }
+  readColors();
 
   let w = 0, h = 0, dpr = 1, rows = 0, cols = 0;
   let running = false, visible = true, raf = 0, t = 0, last = 0;
@@ -280,9 +288,9 @@ function initWave() {
     const zNear = 1.15, zFar = 7.5;
 
     const grad = ctx.createLinearGradient(0, 0, w, 0);
-    grad.addColorStop(0, "rgba(255,255,255,0)");
-    grad.addColorStop(0.5, "rgba(255,255,255,1)");
-    grad.addColorStop(1, "rgba(255,255,255,0)");
+    grad.addColorStop(0, `rgba(${INK},0)`);
+    grad.addColorStop(0.5, `rgba(${INK},1)`);
+    grad.addColorStop(1, `rgba(${INK},0)`);
 
     for (let r = 0; r < rows; r++) {
       const k = r / (rows - 1); // 0 — далеко, 1 — близько
@@ -306,7 +314,7 @@ function initWave() {
       ctx.fill();
       ctx.restore();
 
-      ctx.globalAlpha = 0.07 + 0.55 * Math.pow(k, 1.6);
+      ctx.globalAlpha = (0.07 + 0.55 * Math.pow(k, 1.6)) * alphaK;
       ctx.lineWidth = 0.6 + k * 0.6;
       ctx.strokeStyle = grad;
       ctx.stroke();
@@ -355,10 +363,55 @@ function initWave() {
   }).observe(canvas);
 
   document.addEventListener("visibilitychange", () => (document.hidden ? stop() : start()));
+  document.addEventListener("themechange", () => { readColors(); if (!running) draw(); });
   start();
 }
 
+/* ==========================================================================
+   Тема: світла / темна
+   За замовчуванням — як у системі відвідувача (і змінюється разом з нею).
+   Вибір перемикачем зберігається; якщо він збігається з системним —
+   збережене скидається, і сторінка знову слідує за системою.
+   ========================================================================== */
+function initTheme() {
+  const root = document.documentElement;
+  const btn = $("#theme-toggle");
+  const meta = document.querySelector('meta[name="theme-color"]');
+  const mq = window.matchMedia("(prefers-color-scheme: light)");
+  const systemTheme = () => (mq.matches ? "light" : "dark");
+  const store = {
+    get() { try { return localStorage.getItem("theme"); } catch (e) { return null; } },
+    set(v) { try { v ? localStorage.setItem("theme", v) : localStorage.removeItem("theme"); } catch (e) {} },
+  };
+
+  function apply(theme) {
+    root.dataset.theme = theme;
+    if (meta) meta.content = getComputedStyle(root).getPropertyValue("--bg").trim();
+    if (btn) btn.setAttribute("aria-label", theme === "light" ? "Увімкнути темну тему" : "Увімкнути світлу тему");
+    document.dispatchEvent(new Event("themechange"));
+  }
+
+  function change(theme) {
+    // плавна зміна через View Transitions, якщо браузер підтримує
+    if (document.startViewTransition && !reduceMotion) document.startViewTransition(() => apply(theme));
+    else apply(theme);
+  }
+
+  apply(root.dataset.theme || store.get() || systemTheme());
+
+  btn && btn.addEventListener("click", () => {
+    const next = root.dataset.theme === "light" ? "dark" : "light";
+    store.set(next === systemTheme() ? null : next);
+    change(next);
+  });
+
+  mq.addEventListener("change", () => {
+    if (!store.get()) change(systemTheme());
+  });
+}
+
 /* ========================================================================== */
+initTheme();
 render();
 initReveal();
 initNav();
